@@ -1,0 +1,150 @@
+<html>
+<head>
+    <title>Teste?:</title>
+   <meta property="og:locale" content="pt_BR">
+
+<meta property="og:url" content="https://www.unifeg.edu.br/testemoldura">
+
+<meta property="og:title" content="Título da página ou artigo">
+<meta property="og:site_name" content="Nome do meu site">
+
+<meta property="og:description" content="Minha boa descrição para intrigar os usuários.">
+
+<meta property="og:image" content="https://www.unifeg.edu.br/testemoldura/canvas.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="600">
+<meta property="fb:app_id" content="289255557788943">
+
+<meta property="og:type" content="website">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="moldura.css">
+</head>
+<body>
+    <div class="container">
+        <div id="html-content-holder" style="width: 800px; height: 800px;" class="moldura">
+            <div class="row">
+                <div class="col-4"></div>
+                <div style="width: 280px; height: 280px; float: left; background:red"  id="exibe-foto1">
+                    <img src="" id="profile-img-tag" width="200px" />
+                    <input type="button" id="up-foto-1" value="Escolha uma foto" onclick="insere01()" />
+                </div>
+
+                <div class="col-8">
+                    <textarea style="width: 450px; height: "></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div style="width: 280px; height: 280px; float: left; background:blue"  id="exibe-foto1">
+                        <img src="" id="profile-img-tag2" width="200px" />
+                        <input type="button" id="up-foto-1" value="Escolha uma foto" onclick="insere02()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input id="btn-Preview-Image" type="button" value="Preview"/>
+        <a id="btn-Convert-Html2Image" href="#">Download</a>
+        <br/>
+        <h3>Preview :</h3>
+
+        <img src="" id="imgOut">
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+        <!-- Your share button code -->
+        <div class="fb-share-button" 
+        data-href="https://www.unifeg.edu.br/testemoldura" 
+        data-layout="button_count">
+    </div>
+    <input type="file" name="file" id="profile-img" style="display: none;">
+    <input type="file" name="file" id="profile-img2" style="display: none;">
+</div>
+
+<script>
+    $(document).ready(function(){
+
+
+var element = $("#html-content-holder"); // global variable
+var getCanvas; // global variable
+var newData;
+
+$("#btn-Preview-Image").on('click', function () {
+   html2canvas(element, {
+       onrendered: function (canvas) {
+
+        getCanvas = canvas;
+        var imgageData = getCanvas.toDataURL("image/png");
+    // Now browser starts downloading it instead of just showing it
+    newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    $("#imgOut").attr("src", newData);
+    $('meta[property="og:image"]').attr('content', 'https://www.unifeg.edu.br/testemoldura/'+newData);
+}
+});
+
+});
+
+$("#btn-Convert-Html2Image").on('click', function () {
+    var imgageData = getCanvas.toDataURL("image/png");
+    // Now browser starts downloading it instead of just showing it
+    var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+    $("#btn-Convert-Html2Image").attr("download", "your_pic_name.png").attr("href", newData);
+});
+});
+</script>
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img").change(function(){
+        readURL(this);
+    });
+
+    function insere01(){
+        $("#profile-img").click();
+    }
+
+    function readURL2(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#profile-img-tag2').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img2").change(function(){
+        readURL2(this);
+    });
+
+    function insere02(){
+        $("#profile-img2").click();
+    }
+</script>
+
+
+<script type="text/javascript">
+
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
