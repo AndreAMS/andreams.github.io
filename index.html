@@ -79,7 +79,7 @@ $("#btn-Preview-Image").on('click', function () {
     // Now browser starts downloading it instead of just showing it
     newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
     $("#imgOut").attr("src", newData);
-    $('meta[property="og:image"]').attr('content', 'https://andreams.github.io/'+newData);
+    $('meta[property="og:image"]').attr('content', newData);
 }
 });
 
