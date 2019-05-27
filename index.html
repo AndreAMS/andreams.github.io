@@ -55,6 +55,8 @@
         <h3>Preview :</h3>
 
         <img src="" id="imgOut">
+         <h3>Preview2 :</h3>
+        <div id="previewImage"></div>
         <!-- Load Facebook SDK for JavaScript -->
       <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fandreams.github.io%2F&layout=button_count&size=large&appId=662959713716191&width=129&height=28" width="129" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
         
@@ -73,13 +75,13 @@ var newData;
 $("#btn-Preview-Image").on('click', function () {
    html2canvas(element, {
        onrendered: function (canvas) {
-
+           $("#previewImage").append(canvas);
         getCanvas = canvas;
         var imgageData = getCanvas.toDataURL("image/png");
     // Now browser starts downloading it instead of just showing it
     newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
     $("#imgOut").attr("src", newData);
-    $('meta[property="og:image"]').attr('content', newData);
+    $('meta[property="og:image"]').attr('content', canvas);
 }
 });
 
